@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jonfriend.java35savetravelsfullcrud.models.ExpenseMdl;
@@ -30,9 +32,8 @@ public class ExpenseCtl {
 		return "expenselist.jsp"; 
 	}
 
-	@RequestMapping("/expenses/{expenseID}") 
+	@RequestMapping("/expenses/{expenseId}") 
 	public String expenseView(Model model, @PathVariable("expenseId") Long expenseId) {
-		
 		ExpenseMdl expenseMdl = expenseSrv.findExpense(expenseId); 
 		model.addAttribute("expense", expenseMdl);  
 		return "expenseprofile.jsp"; 
@@ -52,7 +53,6 @@ public class ExpenseCtl {
 		return "expenselistandcreate.jsp"; 
 	}
 
-	
 	@PostMapping("/expensesAndCreate") 
 //	JRF: above can have the same name as the "list" page, b/c they have diff mapping methods; this resolves the goofy naming issue I had
 	public String expensesAndCreate(
@@ -82,5 +82,31 @@ public class ExpenseCtl {
             return "redirect:/expensesAndCreate";
         }
 	}
-// end ctl
+
+//	JRF: update meth
+	
+    @GetMapping("/expenses/{expenseId}/edit")
+    public String editExpense(@PathVariable("expenseId") Long expenseId, Model model) {
+    	ExpenseMdl expenseMdl = expenseSrv.findExpense(expenseId); 
+		model.addAttribute("expense", expenseMdl);  
+        return "expenseprofileedit.jsp";
+    }
+
+
+    @PutMapping("/expenses/{expenseId}/edit")
+    public String updateExpense(@Valid @ModelAttribute("expense") ExpenseMdl expenseMdl, BindingResult result) {
+        if (result.hasErrors()) {
+            return "expenseprofileedit.jsp";
+        } else {
+        	expenseSrv.updateExpense(expenseMdl);
+            return "redirect:/expensesAndCreate";
+        }
+    }
+
+	
+	
+	
+	
+	
+	// end ctl
 }

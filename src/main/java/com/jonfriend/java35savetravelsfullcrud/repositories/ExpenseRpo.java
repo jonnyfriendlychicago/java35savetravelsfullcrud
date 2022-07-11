@@ -11,6 +11,8 @@ import com.jonfriend.java35savetravelsfullcrud.models.ExpenseMdl;
 public interface ExpenseRpo extends CrudRepository<ExpenseMdl, Long>{
 	
 	List<ExpenseMdl> findAll(); 
+	
+
 
 // end repo
 }
