@@ -41,5 +41,18 @@ public class ExpenseSrv {
 			return null; 
 		}
 	}
+	
+	// delete expense by id
+	public void  delete(Long id) {
+			Optional<ExpenseMdl> deleteThisExpenseId = expenseRpo.findById(id); 
+			if(deleteThisExpenseId.isPresent()) {
+				 expenseRpo.deleteById(id); 
+			} else {
+				System.out.println("WTF happened here, Jon... "); 
+			}
+		}
+	
+	
+
 // end srv
 }

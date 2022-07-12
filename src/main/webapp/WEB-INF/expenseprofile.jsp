@@ -24,11 +24,17 @@
 	<h2>java35savetravelsfullcrud - expense Profile</h2>
 	<a href= "/">Home</a>
 	<a href= "/expenses">Expenses</a>
+	<a href= "/expenses/${expense.id}/edit">Edit</a>
 	
 	<h3>expenseName: <c:out value="${expense.expenseName}"></c:out></h3>
 	<h4>vendorName: <c:out value="${expense.vendorName}"></c:out></h4>
 	<h4>expenseAmount: $<c:out value="${expense.expenseAmount}"></c:out></h4>
 	<h4>expenseDescription: <c:out value="${expense.expenseDescription}"></c:out></h4> 
+
+	<form action="/expenses/${expense.id}" method="post">
+	    <input type="hidden" name="_method" value="delete">
+	    <input type="submit" value="Delete this thang">
+	</form>
 
 	
 </body>

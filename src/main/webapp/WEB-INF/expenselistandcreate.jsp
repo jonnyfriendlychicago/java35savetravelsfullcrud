@@ -37,26 +37,33 @@
 	      <th scope="col">expenseName</th>
 	      <th scope="col">vendorName</th>
 	      <th scope="col">expenseAmount</th>
-	      <!-- <th scope="col">expenseDescription</th> -->
+	      <th scope="col">Actions</th> 
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <c:forEach var="record" items="${expenseListy}">
 	        <tr>
-		      <%-- <th scope="row">${record.id}</th> --%>
+
 		      <td >
 		      	<a href= "/expenses/${record.id}">${record.expenseName}</a>
 		      </td>
+		      
 		      <td>${record.vendorName}</td>
-		      
-		      <!-- <td>$${record.expenseAmount}</td> -->
-		      
+
 		      <td>
 			      $<fmt:formatNumber type="number" pattern="0.00" value="${record.expenseAmount}"/> 
 		      </td>
 		      
+		      <td>
+		      	<a href= "/expenses/${record.id}/edit">Edit</a>
+		      	
+		      	<form action="/expenses/${record.id}" method="post">
+				    <input type="hidden" name="_method" value="delete">
+				    <input type="submit" value="Delete this thang">
+				</form>
+		      	
+		      </td>
 		      
-		      <%-- <td>${record.expenseDescription}</td> --%>
 		    </tr>
     	</c:forEach>  
 	  
@@ -74,13 +81,13 @@
 		  
 		  <div class="form-group">
 		    <form:label path="expenseName" for="expenseName" >expenseName</form:label>
-		     <form:input type="text" class="form-control"  path="expenseName" aria-describedby="expenseNameHelp" placeholder="Enter expenseName"/>
+		     <form:input type="text" class="form-control"  path="expenseName" aria-describedby="expenseNameHelp" />
 		     <p class="errorText"><form:errors path="expenseName"/></p>
 		  </div>
 		  
 		  <div class="form-group">
 		    <form:label path="vendorName" for="vendorName">vendorName</form:label>
-		    <form:input type="text" class="form-control" path="vendorName" placeholder="vendorName here"/>
+		    <form:input type="text" class="form-control" path="vendorName" />
 		    <p class="errorText"><form:errors path="vendorName"/></p>
 		  </div>
 		  

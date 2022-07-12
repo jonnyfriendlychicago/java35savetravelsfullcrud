@@ -31,10 +31,10 @@
 	  <thead>
 	    <tr>
 	      <!-- <th scope="col">ID</th> -->
-	      <th scope="col">expenseName</th>
-	      <th scope="col">vendorName</th>
-	      <th scope="col">expenseAmount</th>
-	      <!-- <th scope="col">expenseDescription</th> -->
+	      	<th scope="col">expenseName</th>
+	      	<th scope="col">vendorName</th>
+	      	<th scope="col">expenseAmount</th>
+			<th scope="col">Actions</th> 
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -46,7 +46,9 @@
 		      </td>
 		      <td>${record.vendorName}</td>
 		      <td>$${record.expenseAmount}</td>
-		      <%-- <td>${record.expenseDescription}</td> --%>
+		      <td>
+		      	<a href= "/expenses/${record.id}/edit">Edit</a>
+		      </td>
 		    </tr>
     	</c:forEach>  
 	  </tbody>
